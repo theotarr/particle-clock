@@ -45,6 +45,7 @@ function setup() {
 
 function draw() {
     background(51);
+    stroke(255);
     strokeWeight(3);
     textFont(font,36);
     textAlign(CENTER);
