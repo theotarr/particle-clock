@@ -21,6 +21,11 @@
           success: function(weather) {
             var wxText = weather.temp+' '+weather.units.temp+' '+weather.city+' '+weather.currently+' '+weather.wind.direction+' '+weather.wind.speed+' '+weather.units.speed;
             $("#weather").html(wxText);
+            if (weather.temp > 80) {
+                $("#clothing").html('You should wear shorts today.');
+            } else if (weather.temp < 50) { 
+                $("#clothing").html('<b>IT IS FREAKIN COLD!</b>');
+            }
           },
           error: function(error) {
             wxText = 'Cannot load weather';
@@ -30,7 +35,8 @@
       </script>
     </head>
 <body>
-    <div id="weather">Loading Weather</div>
+    <div id="weather"></div>
+    <div id="clothing"></div>
 </body>
 
 </html>
