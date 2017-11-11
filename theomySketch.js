@@ -15,7 +15,6 @@ var canvasWidth = 750;
 var formattedTime = "00:00:00";
 var prevSec = -1;
 var maxChangeForce = 0;
-var insText = '';
 
 var instructions = [];
 
@@ -41,29 +40,7 @@ function setup() {
         vehicles.push(vehicle);
     }
 
-    var boundsIns = font.textBounds(insText, 0, 0, 30);
-    var posxIns = width / 2 - boundsIns.w / 2;
-    var posyIns = height / 6 + boundsIns.h / 2;
 
-    var insAr = split(insText, ' ');
-
-    for (var i = 0; i < insAr.length; i++) {
-        var bounds2 = font.textBounds(insAr[i], 0, 0, 30);
-        var posx2 = posxIns;
-        var posy2 = posyIns;
-
-        posxIns += bounds2.w + 10;
-
-        var points2 = font.textToPoints(insAr[i], posx2, posy2, 30, {
-            sampleFactor: 0.3
-        });
-
-        for (var j = 0; j < points2.length; j++) {
-            var pt = points2[j];
-            var v = new Vehicle(pt.x, pt.y, 3);
-            instructions.push(v);
-        }
-    }
 }
 
 function draw() {
