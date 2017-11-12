@@ -10,10 +10,9 @@ var vehicles = [];
 var canvasHeight = 400;
 var canvasWidth = 750;
 var weatherString  = 'Loading Weather...';
-var clothingString = '';
+var locationString = '';
 var weatherLoaded = false;
 var weatherThumbnail;
-
 
 //var texts = ['Welcome', 'aboard', 'the', 'coding', 'train', '!!!'];
 //var nextT = 0;
@@ -62,34 +61,27 @@ function draw() {
 
     if (second() == 0 || weatherLoaded == false) {
         $.simpleWeather({
-          location: '',
-          woeid: '23689635',
+          location: lat+','+lng,
+          woeid: '', //23689635',
           unit: 'f',
           success: function(weather) {
             weatherLoaded = true;
             weatherString = weather.temp + 'º ' + weather.units.temp;
 
-            if (weather.temp > 80) {clothingString = 'Shorts and Tee'}
-            if (weather.temp > 60) {clothingString = 'Pants and Tee'}
-            if (weather.temp > 50) {clothingString = 'Pants and Long Sleeve'}
-            if (weather.temp > 40) {clothingString = 'Pants and Sweat Shirt'}
-            if (weather.temp > 30) {clothingString = 'Pants and Heavy Jacket'}
-            if (weather.temp > 20) {clothingString = 'Pants and Multi Layers'}
-            if (weather.temp < 10) {clothingString = 'It is FREAKING cold!!!'}
-
+            locationString = weather.city + ',' + weather.region;
             weatherThumbnail = loadImage('img/'+weather.code+'.png');
 
           },
           error: function(error) {
             weatherString = 'Cannot load weather\n';
-            clothingString = '';
+            locationString = '';
           }
         });
     }
     textAlign(LEFT);
     text(weatherString, 10, canvasHeight-12);
     textAlign(CENTER);
-    text(clothingString, canvasWidth/2, canvasHeight-12);
+    text(locationString, canvasWidth/2, canvasHeight-12);
     if (weatherThumbnail != null) {
         image(weatherThumbnail, canvasWidth-55, canvasHeight-55, 75, 75);
     }
