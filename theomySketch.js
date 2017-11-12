@@ -61,8 +61,8 @@ function draw() {
 
     if (second() == 0 || weatherLoaded == false) {
         $.simpleWeather({
-          location: lat+','+lng,
-          woeid: '', //23689635',
+          location: latlnglocation,
+          woeid: woeid, 
           unit: 'f',
           success: function(weather) {
             weatherLoaded = true;

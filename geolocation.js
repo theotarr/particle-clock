@@ -1,14 +1,9 @@
-var lat;
-var lng;
+var latlnglocation = '';
+var woeid = '23689635';
 
 if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
-            lat = position.coords.latitude;
-            lng = position.coords.longitude;
+            latlnglocation = position.coords.latitude+','+position.coords.longitude;
+            woeid = '';
           });
-} else {
-          // Browser doesn't support Geolocation
-          lat = 40.797873;
-          lng = -73.960763;
-}
-      
+} 
