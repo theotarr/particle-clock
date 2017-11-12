@@ -13,6 +13,7 @@ var weatherString  = 'Loading Weather...';
 var locationString = '';
 var weatherLoaded = false;
 var weatherThumbnail;
+var lastWeatherCheck = new Date();
 
 //var texts = ['Welcome', 'aboard', 'the', 'coding', 'train', '!!!'];
 //var nextT = 0;
@@ -59,13 +60,18 @@ function draw() {
 
     text(dateString, canvasWidth/2, 35);
 
-    if (second() == 0 || weatherLoaded == false) {
+    if (new Date().getTime() - lastWeatherCheck.getTime() > 5*60*1000) {
+        weatherLoaded = false;
+    }
+
+    if (second() == 0 && weatherLoaded == false) {
         $.simpleWeather({
           location: latlnglocation,
-          woeid: woeid, 
+          woeid: '', 
           unit: 'f',
           success: function(weather) {
             weatherLoaded = true;
+            lastWeatherCheck = new Date();
             weatherString = weather.temp + 'º ' + weather.units.temp;
 
             locationString = weather.city + ',' + weather.region;
