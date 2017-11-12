@@ -10,6 +10,7 @@ var vehicles = [];
 var canvasHeight = 400;
 var canvasWidth = 750;
 var weatherString  = 'Loading Weather...';
+if (!locationFound) { weatherString = 'Trying to locate myself...'; }
 var locationString = '';
 var weatherLoaded = false;
 var weatherThumbnail;
