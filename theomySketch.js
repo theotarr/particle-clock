@@ -65,6 +65,7 @@ function draw() {
     }
 
     if (second() == 0 && weatherLoaded == false) {
+        if (!locationFound) { getmylocation(); }
         $.simpleWeather({
           location: latlnglocation,
           woeid: '', 

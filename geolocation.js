@@ -1,7 +1,13 @@
 var latlnglocation = 'New York';
+var locationFound = false;
 
-if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            latlnglocation = position.coords.latitude+','+position.coords.longitude;
-          });
-} 
+function getmylocation() {
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+      latlnglocation = position.coords.latitude+','+position.coords.longitude;
+      locationFound = true;
+    });
+  } 
+}
+
+getmylocation();
