@@ -11,6 +11,8 @@ var canvasHeight = 400;
 var canvasWidth = 750;
 var weatherString  = 'Loading Weather...';
 var clothingString = '';
+var weatherLoaded = false;
+var weatherThumbnail;
 
 
 //var texts = ['Welcome', 'aboard', 'the', 'coding', 'train', '!!!'];
@@ -31,7 +33,7 @@ function setup() {
 
     var bounds = font.textBounds(formattedTime, 0, 0, 162);
     var posx = canvasWidth / 2 - bounds.w / 2;
-    var posy = canvasHeight / 2 + 65;
+    var posy = canvasHeight / 2 + 55;
 
     var points = font.textToPoints(formattedTime, posx, posy, 162, {
         sampleFactor: 0.1
@@ -56,27 +58,41 @@ function draw() {
 
     var dateString = days[d.getDay()] + ', ' + months[month()-1] + ' ' + day() + ', ' + year();
 
-    text(dateString, canvasWidth/2, 55);
+    text(dateString, canvasWidth/2, 35);
 
-    if (second() == 0) {
+    if (second() == 0 || weatherLoaded == false) {
         $.simpleWeather({
           location: '',
           woeid: '23689635',
           unit: 'f',
           success: function(weather) {
-            weatherString = weather.temp + ' ' + weather.units.temp;
-            clothingString = 'Winter jacket';  
+            weatherLoaded = true;
+            weatherString = weather.temp + 'º ' + weather.units.temp;
+
+            if (weather.temp > 80) {clothingString = 'Shorts and Tee'}
+            if (weather.temp > 60) {clothingString = 'Pants and Tee'}
+            if (weather.temp > 50) {clothingString = 'Pants and Long Sleeve'}
+            if (weather.temp > 40) {clothingString = 'Pants and Sweat Shirt'}
+            if (weather.temp > 30) {clothingString = 'Pants and Heavy Jacket'}
+            if (weather.temp > 20) {clothingString = 'Pants and Multi Layers'}
+            if (weather.temp < 10) {clothingString = 'It is FREAKING cold!!!'}
+
+            weatherThumbnail = loadImage('img/'+weather.code+'.png');
+
           },
           error: function(error) {
-            weatherString = 'Cannot load weather';
+            weatherString = 'Cannot load weather\n';
             clothingString = '';
           }
         });
     }
-    textAlign(CENTER);
-    text(weatherString, canvasWidth/2, canvasHeight-20);
     textAlign(LEFT);
-    text(clothingString, 10, canvasHeight-20);
+    text(weatherString, 10, canvasHeight-12);
+    textAlign(CENTER);
+    text(clothingString, canvasWidth/2, canvasHeight-12);
+    if (weatherThumbnail != null) {
+        image(weatherThumbnail, canvasWidth-55, canvasHeight-55, 75, 75);
+    }
 
 
     calcTime();
@@ -120,7 +136,7 @@ function updateText(newText) {
     formattedTime = newText;
     var bounds = font.textBounds(formattedTime, 0, 0, 162);
     var posx = canvasWidth / 2 - bounds.w / 2;
-    var posy = canvasHeight / 2 + 65;
+    var posy = canvasHeight / 2 + 55;
 
     var points = font.textToPoints(formattedTime, posx, posy, 162, {
         sampleFactor: 0.1

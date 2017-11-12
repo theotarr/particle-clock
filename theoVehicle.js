@@ -41,13 +41,6 @@ Vehicle.prototype.update = function () {
 
 Vehicle.prototype.show = function () {
     stroke(255);
-    var h = hour();
-    if (h >= 5 && h <= 12) {
-        stroke(color('#ffce00'));
-    } else if (h >= 13 && h <= 20) {
-        stroke(color('#cc1367'));
-    } 
-    
     strokeWeight(this.r);
     point(this.pos.x, this.pos.y);
 }
