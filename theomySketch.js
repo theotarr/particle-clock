@@ -7,8 +7,8 @@
 
 var font;
 var vehicles = [];
-var canvasHeight = 480;
-var canvasWidth = 800;
+var canvasHeight = 465;
+var canvasWidth = 780;
 var weatherString  = 'Loading Weather...';
 if (!locationFound) { weatherString = 'Trying to locate myself...'; }
 var locationString = '';
