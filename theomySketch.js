@@ -7,8 +7,8 @@
 
 var font;
 var vehicles = [];
-var canvasHeight = 400;
-var canvasWidth = 750;
+var canvasHeight = 480;
+var canvasWidth = 800;
 var weatherString  = 'Loading Weather...';
 if (!locationFound) { weatherString = 'Trying to locate myself...'; }
 var locationString = '';
@@ -74,7 +74,7 @@ function draw() {
           success: function(weather) {
             weatherLoaded = true;
             lastWeatherCheck = new Date();
-            weatherString = weather.temp + 'º ' + weather.units.temp;
+            weatherString = weather.temp + ' ' + weather.units.temp;
 
             locationString = weather.city + ',' + weather.region;
             weatherThumbnail = loadImage('wx_images/'+weather.code+'.png');
