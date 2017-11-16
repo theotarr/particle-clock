@@ -77,7 +77,7 @@ function draw() {
             weatherString = weather.temp + 'º ' + weather.units.temp;
 
             locationString = weather.city + ',' + weather.region;
-            weatherThumbnail = loadImage('img/'+weather.code+'.png');
+            weatherThumbnail = loadImage('wx_images/'+weather.code+'.png');
 
           },
           error: function(error) {
